@@ -1,0 +1,24 @@
+[2023-11-09T13:31:01.452-0300] {taskinstance.py:1103} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: test1.tarea0 manual__2023-11-09T16:30:50+00:00 [queued]>
+[2023-11-09T13:31:01.461-0300] {taskinstance.py:1103} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: test1.tarea0 manual__2023-11-09T16:30:50+00:00 [queued]>
+[2023-11-09T13:31:01.461-0300] {taskinstance.py:1308} INFO - Starting attempt 1 of 2
+[2023-11-09T13:31:01.483-0300] {taskinstance.py:1327} INFO - Executing <Task(PythonOperator): tarea0> on 2023-11-09 16:30:50+00:00
+[2023-11-09T13:31:01.488-0300] {standard_task_runner.py:57} INFO - Started process 23143 to run task
+[2023-11-09T13:31:01.504-0300] {standard_task_runner.py:84} INFO - Running: ['airflow', 'tasks', 'run', 'test1', 'tarea0', 'manual__2023-11-09T16:30:50+00:00', '--job-id', '20', '--raw', '--subdir', 'DAGS_FOLDER/test.py', '--cfg-path', '/var/folders/b1/g95ps3q94l3_vhb04r0d1wd00000gn/T/tmpz3s1j8pt']
+[2023-11-09T13:31:01.510-0300] {standard_task_runner.py:85} INFO - Job 20: Subtask tarea0
+[2023-11-09T13:31:01.590-0300] {task_command.py:410} INFO - Running <TaskInstance: test1.tarea0 manual__2023-11-09T16:30:50+00:00 [running]> on host mbpdelucas880.fibertel.com.ar
+[2023-11-09T13:31:01.682-0300] {taskinstance.py:1545} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='test@test.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='test1' AIRFLOW_CTX_TASK_ID='tarea0' AIRFLOW_CTX_EXECUTION_DATE='2023-11-09T16:30:50+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2023-11-09T16:30:50+00:00'
+[2023-11-09T13:31:01.684-0300] {taskinstance.py:1824} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/Users/lucasmorrone/Documents/airflow/env/lib/python3.11/site-packages/airflow/operators/python.py", line 181, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lucasmorrone/Documents/airflow/env/lib/python3.11/site-packages/airflow/operators/python.py", line 198, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lucasmorrone/documents/airflow/dags/test.py", line 45, in tarea0_func
+    raise AirflowFailException("Cancelado, no se despliega el commit 1")
+airflow.exceptions.AirflowFailException: Cancelado, no se despliega el commit 1
+[2023-11-09T13:31:01.691-0300] {taskinstance.py:1345} INFO - Immediate failure requested. Marking task as FAILED. dag_id=test1, task_id=tarea0, execution_date=20231109T163050, start_date=20231109T163101, end_date=20231109T163101
+[2023-11-09T13:31:01.705-0300] {standard_task_runner.py:104} ERROR - Failed to execute job 20 for task tarea0 (Cancelado, no se despliega el commit 1; 23143)
+[2023-11-09T13:31:01.725-0300] {local_task_job_runner.py:225} INFO - Task exited with return code 1
+[2023-11-09T13:31:01.750-0300] {taskinstance.py:2651} INFO - 0 downstream tasks scheduled from follow-on schedule check
