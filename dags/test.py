@@ -35,7 +35,7 @@ dag = DAG(
 	start_date=datetime(2021, 1, 1),
 	catchup=False,
 	tags=["example"],
-    params={"commit":"00000000"}
+    params={"commit":"00000000"} #excepciones
 )
 
 def tarea0_func(**kwargs):
@@ -46,9 +46,19 @@ def tarea0_func(**kwargs):
 
     return {"ok": 1 }
 
-def tarea2_func(**kwargs):
-    return {"ok": 1 }
+#En Airflow xcom es la salida de una tarea
 
+
+def tarea2_func(**kwargs):
+    xcom_value = kwargs['ti'].xcom_pull(task_ids='tarea0')
+    
+    print( 'hola' )
+    print( xcom_value )
+
+    return {"ok": 2 }
+
+
+#Operadores 
 tarea0 = PythonOperator(
         task_id="tarea0",
         python_callable=tarea0_func,
